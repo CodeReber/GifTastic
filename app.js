@@ -7,6 +7,7 @@ $(document).ready(function(){
       $("#print").empty();
         // In this case, the "this" keyword refers to the button that was clicked
         var data = $(this).attr("data-name");
+        var state = $(this).attr("data-state");
   
         // Constructing a URL to search Giphy for the name of the person who said the quote
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
