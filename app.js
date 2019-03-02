@@ -7,7 +7,6 @@ $(document).ready(function(){
       $("#print").empty();
         // In this case, the "this" keyword refers to the button that was clicked
         var data = $(this).attr("data-name");
-        var state = $(this).attr("data-state");
   
         // Constructing a URL to search Giphy for the name of the person who said the quote
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
@@ -20,6 +19,7 @@ $(document).ready(function(){
         })
           // After the data comes back from the API
           .then(function(response) {
+// ;
             // Storing an array of results in the results variable
             var results = response.data;
             // Looping over every result item
@@ -41,7 +41,14 @@ $(document).ready(function(){
   
                 // Giving the image tag an src attribute of a proprty pulled off the
                 // result item
-                personImage.attr("src", results[i].images.fixed_height.url);
+                personImage.addClass("pic");
+                personImage.attr("src", results[i].images.fixed_height_still.url);
+                personImage.attr("data-still", results[i].images.fixed_height_still.url);
+                personImage.attr("data-animate", results[i].images.fixed_height.url);
+                personImage.attr("data-state","still");
+
+
+
   
                 // Appending the paragraph and personImage we created to the "gifDiv" div we created
                 gifDiv.append(p);
@@ -51,10 +58,13 @@ $(document).ready(function(){
                 
                 $("#print").prepend(gifDiv);
                 
+   
               // }
             }
           });
       };
+
+
       function renderButtons() {
   
         // Deleting the movies prior to adding new movies
@@ -93,6 +103,17 @@ $(document).ready(function(){
       
       renderButtons();
       $(document).on("click", ".btn", displayWrestlerInfo);
+      $(document).on("click", ".pic", function(){
+        var state = $(this).attr("data-state");
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");}
+        
+          
+      });
 
 
 });
