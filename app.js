@@ -58,6 +58,7 @@ $(document).ready(function(){
   
         // Deleting the movies prior to adding new movies
         // (this is necessary otherwise you will have repeat buttons)
+        // $(".Buttons").empty();
         $(".Buttons").empty();
   
         // Looping through the array of movies
@@ -67,7 +68,7 @@ $(document).ready(function(){
           // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           var a = $("<button>");
           // Adding a class of movie-btn to our button
-          a.addClass("btn");
+          a.addClass("btn btn-primary mr-1 mt-1");
           // Adding a data-attribute
           a.attr("data-name", wrestlers[i]);
           // Providing the initial button text
